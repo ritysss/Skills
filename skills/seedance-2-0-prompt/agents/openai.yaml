@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seedance 2.0 Prompt"
+  short_description: "Controlled Seedance video prompts"
+  default_prompt: "Use $seedance-2-0-prompt to write one paste-ready Chinese Seedance 2.0-compatible video prompt for my current provider, with reference roles, camera control, and final-frame continuity."
