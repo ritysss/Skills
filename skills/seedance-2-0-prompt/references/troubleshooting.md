@@ -1,147 +1,147 @@
-# Troubleshooting Reference
+# 故障修复参考
 
-Read this when the user reports a bad Seedance result, asks why a shot failed, or wants a repair prompt.
+当用户反馈生成结果不好、询问失败原因，或需要修复版提示词时，读取本文件。
 
-## Repair Workflow
+## 修复流程
 
-1. Identify the visible failure.
-2. Keep accepted parts unchanged.
-3. Remove conflicting or low-priority references.
-4. Rewrite the smallest prompt area that controls the failure.
-5. Change one variable per retry when practical.
+1. 先说清楚可见失败是什么。
+2. 已经成功的部分保持不变。
+3. 移除冲突或低优先级参考素材。
+4. 只重写控制失败点的最小提示词区域。
+5. 条件允许时，每次只改一个变量。
 
-## Failure Matrix
+## 失败类型
 
-### Narrative Or Shot Logic Breaks
+### 叙事或镜头逻辑断裂
 
-Symptoms: teleporting, missing intermediate beat, unclear cause/effect, wrong order.
+表现：瞬移、缺少中间动作、因果关系不清、动作顺序错误。
 
-Fix:
+修法：
 
-- split into timed shots or separate generation blocks
-- give each segment one narrative task
-- write explicit start state and final frame
-- use hard cuts when continuity is more important than a single take
+- 拆成分时镜头或多个生成块。
+- 每段只承担一个叙事任务。
+- 明确起始状态和终帧。
+- 连贯性比一镜到底更重要时，使用硬切。
 
-### Image Anchor Does Not Stick
+### 图像锚点不稳定
 
-Symptoms: character, outfit, product, or composition drifts away from approved still.
+表现：人物、服装、产品或构图偏离已确认图片。
 
-Fix:
+修法：
 
-- state `@图片1 作为首帧/人物外观/构图参考`
-- reduce action range
-- reduce camera movement
-- add identity, wardrobe, silhouette, and contact-point locks
-- remove secondary references that contradict the approved image
+- 写清 `@图片1 作为首帧/人物外观/构图参考`。
+- 减小动作幅度。
+- 减小镜头运动。
+- 加入身份、服装、轮廓和接触点锚定。
+- 移除与确认图冲突的次要参考。
 
-### Subject Drifts Or Floats
+### 主体漂移或悬浮
 
-Symptoms: feet slide, character changes screen position, body floats.
+表现：脚滑、画面位置变化、身体漂浮。
 
-Fix:
+修法：
 
-- add screen position and depth
-- add ground contact points
-- lock body state and allowed micro-motions
-- use slower camera movement
-- specify that camera motion preserves composition
+- 加入画面位置和前中后景深度。
+- 加入地面、墙面、桌面、栏杆等接触点。
+- 锁定身体状态和允许的微动作。
+- 使用更慢的运镜。
+- 明确摄影机运动保持构图。
 
-### Characters Swap Positions
+### 角色换位或合并
 
-Symptoms: two people switch sides, cross the center line, or merge.
+表现：两个人交换左右、跨过中线、身体融合。
 
-Fix:
+修法：
 
-- define Character A and Character B separately
-- lock left/right side, depth, distance, gaze, and crossing rule
-- preserve central negative space
-- simplify action so neither character crosses the center line
+- 分别定义角色A和角色B。
+- 锁定左右位置、深度、距离、视线和跨线规则。
+- 保留中间负空间。
+- 简化动作，让任何角色都不跨过画面中央竖线。
 
-### Face, Hands, Or Body Deforms
+### 面部、手部或身体变形
 
-Symptoms: unstable face, wrong proportions, extra fingers, distorted limbs.
+表现：脸不稳定、比例错误、多手指、肢体扭曲。
 
-Fix:
+修法：
 
-- reduce action intensity
-- keep face/hands in controlled focus
-- anchor natural body proportions
-- avoid combining fast movement, close-up face, and complex hand action
-- use stable shot size instead of extreme dynamic camera
+- 降低动作强度。
+- 让面部和手部处在受控焦点里。
+- 锚定自然人体比例。
+- 避免在一个短镜头里同时写快速运动、脸部近景和复杂手部动作。
+- 用稳定景别替代极端动态镜头。
 
-### Camera Feels Random
+### 镜头随机
 
-Symptoms: unexpected cuts, uncontrolled pans, inconsistent framing.
+表现：意外切镜、乱摇、构图不稳定。
 
-Fix:
+修法：
 
-- choose one camera behavior
-- state movement speed and stability
-- lock focus target
-- say the camera preserves subject screen position
-- use `固定机位` or `缓慢推进` for repair attempts
+- 只选择一个镜头行为。
+- 写明运动速度和稳定方式。
+- 锁定焦点对象。
+- 说明镜头运动保持主体画面位置。
+- 修复尝试优先使用 `固定机位` 或 `缓慢推进`。
 
-### Style Or Color Drifts
+### 风格或色彩漂移
 
-Symptoms: style changes mid-shot, color temperature flickers, lighting resets.
+表现：风格中途变化、色温闪烁、光线重置。
 
-Fix:
+修法：
 
-- choose one main visual anchor
-- state light source, color palette, texture, and white-balance stability
-- remove contradictory style stacks
-- keep environment and exposure continuity in `[约束]`
+- 只选择一个主要视觉锚点。
+- 写清光源、色彩基调、质感和白平衡稳定。
+- 移除互相矛盾的风格堆叠。
+- 在 `[约束]` 里保持环境和曝光连续。
 
-### Audio Or Dialogue Fails
+### 音频或对白失败
 
-Symptoms: lip sync poor, too many speakers, beat mismatch.
+表现：口型不准、说话者太多、节拍对不上。
 
-Fix:
+修法：
 
-- use one main speaker/singer per shot
-- shorten dialogue
-- specify timing only for the key line
-- use `@音频1` only for rhythm/dialogue if it is actually supplied
-- if audio is not fixed, default to `无BGM`
+- 一个镜头优先一个主要说话者或演唱者。
+- 缩短对白。
+- 只给关键句写时间关系。
+- 只有真的上传音频时才使用 `@音频1`。
+- 没有固定音频时默认 `无BGM`。
 
-### Edit Video Changes Too Much
+### 视频编辑改动过大
 
-Symptoms: background, camera, lighting, or untouched areas mutate.
+表现：背景、运镜、光线或未指定区域被重构。
 
-Fix:
+修法：
 
-- start with preservation scope
-- define the exact replacement/addition/removal
-- name untouched areas
-- preserve duration, camera, lighting, and space when appropriate
-- reduce edit scope before retrying
+- 先写保留范围。
+- 精确定义替换、新增或删除内容。
+- 点名未修改区域。
+- 必要时保留原时长、原运镜、原光线和原空间。
+- 先缩小编辑范围，再重试。
 
-### Extension Has A Seam
+### 视频延展有断点
 
-Symptoms: continuation does not match source ending.
+表现：延展段和原视频结尾接不上。
 
-Fix:
+修法：
 
-- describe the original video's final visible state
-- continue existing camera direction and speed
-- preserve subject identity, light, color, and environment
-- make the first new action small and physically connected
-- write final frame for the extension
+- 描述原视频最后一帧的可见状态。
+- 延续已有镜头方向和速度。
+- 保持主体身份、光线、色彩和环境。
+- 新动作从一个很小、物理上相连的动作开始。
+- 为延展段写终帧。
 
-### Text Or Logo Is Unreadable
+### 文字或 logo 不清楚
 
-Symptoms: garbled subtitle, wrong slogan, unstable logo.
+表现：字幕乱码、标语错误、logo 不稳定。
 
-Fix:
+修法：
 
-- keep text short
-- use simple words and common punctuation
-- specify timing, position, font style, color, and size
-- avoid long sentences or multiple text blocks
-- for exact logos, prefer compositing in post unless the generation only needs a rough placeholder
+- 文字尽量短。
+- 使用简单词和常见标点。
+- 写清时间、位置、字体风格、颜色和大小。
+- 避免长句或多个文字块。
+- 精确 logo 优先后期合成，视频生成只负责粗占位。
 
-## Minimum Repair Template
+## 最小修复模板
 
 ```text
 保留：...
@@ -152,4 +152,4 @@ Fix:
 终帧：...
 ```
 
-Convert this into the normal prompt format before final delivery.
+最终交付时，把这个修复模板整理进正常提示词结构。
