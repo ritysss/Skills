@@ -1,37 +1,37 @@
-# Seedance 2.0 Vocabulary
+# Seedance 2.0 词汇参考
 
-Use this reference only when choosing precise production language.
+只在需要更精准的镜头、光线、质感、物理或音频语言时读取本文件。
 
-## Lens And Focal Length Language
+## 焦段和镜头感
 
-Treat focal length as prompt guidance, not guaranteed camera metadata.
+焦段是提示词语言，不是精确元数据。
 
-| Lens language | Use for | Effect |
+| 镜头语言 | 适合场景 | 效果 |
 |---|---|---|
-| `14mm / 18mm 超广角` | huge spaces, action, subjective movement | exaggerated space, stronger distortion risk |
-| `24mm 广角` | street, action, environment-heavy cinematic shots | strong depth and spatial energy |
-| `35mm 广角中景` | balanced people + environment | natural cinematic perspective |
-| `50mm 标准镜头` | calm narrative, product/person balance | close to human-eye feeling |
-| `85mm 中长焦` | portraits, emotion, premium close-ups | background compression, shallow depth |
-| `135mm 长焦` | distance, isolation, luxury compression | strong compression, narrow frame |
-| `微距镜头` | product detail, texture, droplets, skin/material | extreme detail and shallow focus |
-| `变形宽银幕镜头` | cinematic spectacle | oval bokeh, horizontal flare, wide-screen feel |
+| `14mm / 18mm 超广角` | 巨大空间、动作、主观运动 | 空间夸张，畸变风险更高 |
+| `24mm 广角` | 街头、动作、环境叙事 | 空间能量强 |
+| `35mm 广角中景` | 人物和环境平衡 | 自然电影感 |
+| `50mm 标准镜头` | 平静叙事、人物/产品平衡 | 接近人眼感受 |
+| `85mm 中长焦` | 肖像、情绪、质感近景 | 背景压缩，浅景深 |
+| `135mm 长焦` | 距离感、孤立感、高级压缩 | 压缩强，画面窄 |
+| `微距镜头` | 产品细节、液体、皮肤/材质 | 细节强，景深浅 |
+| `变形宽银幕镜头` | 电影奇观 | 横向光晕、椭圆焦外、宽银幕感 |
 
-Default choices:
+默认选择：
 
-- People in environment: `35mm`
-- Face/emotion: `85mm`
-- Product detail: `微距镜头` or `85mm`
-- Big scene reveal: `24mm`
-- Premium compressed image: `85mm` or `135mm`
+- 人物加环境：`35mm`
+- 面部情绪：`85mm`
+- 产品细节：`微距镜头` 或 `85mm`
+- 大场景揭示：`24mm`
+- 高级压缩画面：`85mm` 或 `135mm`
 
-## Camera Movement
+## 摄影机运动
 
-Write camera movement with:
+镜头运动建议写成：
 
-`movement + speed + subject lock + stability`
+`运动方式 + 速度 + 主体锁定 + 稳定方式`
 
-Reliable movement terms:
+稳定词汇：
 
 - `固定机位，三脚架稳定`
 - `缓慢推进`
@@ -45,26 +45,26 @@ Reliable movement terms:
 - `手持跟拍，轻微真实晃动`
 - `焦点转移`
 
-Risk guidance:
+风险提示：
 
-- Prefer `缓慢`, `平稳`, `匀速`.
-- Use `快速`, `剧烈`, `FPV`, `甩镜`, or `子弹时间` only when the user explicitly wants high energy.
-- Avoid combining fast camera, complex body motion, text, and detailed faces in one short shot.
+- 优先使用 `缓慢`、`平稳`、`匀速`。
+- `快速`、`剧烈`、`FPV`、`甩镜`、`子弹时间` 只在用户明确要高能量时使用。
+- 快速镜头、复杂肢体、文字和精细人脸不要堆进同一个短镜头。
 
-## Shot Size
+## 景别
 
-- `远景`: establishes place and scale
-- `全景`: full body and environment
-- `中景`: upper body or subject with clear surroundings
-- `中近景`: chest-up with some environment
-- `近景`: face/upper body emphasis
-- `特写`: face/object detail
-- `大特写`: eyes, mouth, logo, small detail
-- `微距`: texture, liquid, material surface
+- `远景`：交代地点和规模
+- `全景`：完整身体和环境
+- `中景`：上半身或主体加清楚环境
+- `中近景`：胸部以上，保留部分环境
+- `近景`：面部或上半身重点
+- `特写`：面部、物体或细节
+- `大特写`：眼睛、嘴、logo、小细节
+- `微距`：材质、液体、表面纹理
 
-## Light And Color
+## 光线和色彩
 
-Light terms:
+光线词：
 
 - `柔和环境光`
 - `左侧45度窗光`
@@ -78,7 +78,7 @@ Light terms:
 - `霓虹反射`
 - `干净棚拍光`
 
-Color terms:
+色彩词：
 
 - `低饱和青绿色调`
 - `暖金色夕阳色调`
@@ -89,9 +89,9 @@ Color terms:
 - `白平衡稳定`
 - `色彩基调一致`
 
-## Style And Texture
+## 风格和质感
 
-Choose one main anchor:
+只选择一个主要风格锚点：
 
 - `写实电影感，35mm胶片质感，自然颗粒，柔和高光溢出`
 - `数字电影感，干净画面，精确色彩还原`
@@ -101,11 +101,11 @@ Choose one main anchor:
 - `赛博朋克夜景，霓虹光，潮湿街道反射`
 - `90年代港风复古，黄绿色调，浓重胶片颗粒，变形镜头光晕`
 
-Do not stack multiple unrelated anchors.
+多个无关风格同时出现时，保留最能服务画面的那个。
 
-## Physical Detail Terms
+## 物理细节
 
-Use when material behavior matters:
+材质或运动行为重要时使用：
 
 - `真实物理`
 - `重力`
@@ -117,43 +117,41 @@ Use when material behavior matters:
 - `烟雾扩散，粒子飘散`
 - `金属反射，表面质感清晰`
 
-## Audio Terms
+## 音频词汇
 
-Always write audio.
+每条提示词都写音频。
 
-No fixed audio:
+没有固定音频：
 
 - `无BGM，保留自然环境声。`
 - `无BGM，静音处理，动作节奏由画面运动承担。`
 
-Environment:
+环境声：
 
 - `雨声、远处车流声、霓虹灯电流低鸣`
 - `室内空调底噪、杯子轻碰桌面的声音`
 - `脚步声、衣料摩擦声、轻微呼吸声`
 
-Action SFX:
+动作声：
 
 - `低频冲击声`
 - `金属摩擦声`
 - `水花飞溅声`
 - `镜头节拍点轻微呼吸感`
 
-Audio reference:
+音频参考：
 
 - `@音频1 作为节奏参考，动作贴合主拍点。`
 - `@音频1 作为对白参考，单一说话者口型尽量同步。`
 
-## Positive Anchors
+## 正向锚点
 
-Use positive wording:
-
-| Need | Write |
+| 需求 | 写法 |
 |---|---|
-| clear image | `焦点清晰，细节锐利，纹理稳定` |
-| stable face | `面部特征清晰，五官结构稳定，自然人体比例` |
-| no shake | `画面平稳，云台稳定，运动流畅` |
-| no style drift | `风格锁定，色彩基调一致，视觉连贯` |
-| no flicker | `白平衡锁定，光线连续，无色温跳变` |
-| no deformation | `自然比例，结构准确，边缘线条稳定` |
-| subject stays framed | `构图锁定，主体保持画面中心/三分线位置` |
+| 画面清晰 | `焦点清晰，细节锐利，纹理稳定` |
+| 脸稳定 | `面部特征清晰，五官结构稳定，自然人体比例` |
+| 镜头不抖 | `画面平稳，云台稳定，运动流畅` |
+| 风格不漂 | `风格锁定，色彩基调一致，视觉连贯` |
+| 光线不闪 | `白平衡锁定，光线连续，无色温跳变` |
+| 身体不变形 | `自然比例，结构准确，边缘线条稳定` |
+| 主体留在构图里 | `构图锁定，主体保持画面中心/三分线位置` |
