@@ -1,8 +1,8 @@
-# Seedance 2.0 Prompt Examples
+# Seedance 2.0 提示词示例
 
-These examples show shape and density. Do not copy content unless the user asks for a similar scene.
+这些示例用于参考结构、密度和字段写法。除非用户要求相似场景，不直接复制具体内容。
 
-## Text-To-Video
+## 文生视频
 
 ```text
 【基础设定】
@@ -20,7 +20,7 @@ These examples show shape and density. Do not copy content unless the user asks 
 [音频] 无BGM，保留雨声、远处车流声和轻微衣料摩擦声。
 ```
 
-## Multimodal Reference
+## 多参考素材
 
 ```text
 【基础设定】
@@ -41,7 +41,7 @@ These examples show shape and density. Do not copy content unless the user asks 
 [音频] @音频1 作为节奏与人声参考，单一演唱者口型尽量贴合主旋律，无额外BGM。
 ```
 
-## First/Last-Frame
+## 首尾帧
 
 ```text
 【基础设定】
@@ -62,7 +62,7 @@ These examples show shape and density. Do not copy content unless the user asks 
 [音频] 无BGM，保留低沉引擎声、轮胎压过湿地的细微水声和远处城市环境声。
 ```
 
-## Edit Video
+## 视频编辑
 
 ```text
 【基础设定】
@@ -83,7 +83,7 @@ These examples show shape and density. Do not copy content unless the user asks 
 [音频] 无BGM，保留原视频环境声；如原视频无声，则静音处理。
 ```
 
-## Multi-Shot Storyboard
+## 多镜头分镜
 
 ```text
 【基础设定】
