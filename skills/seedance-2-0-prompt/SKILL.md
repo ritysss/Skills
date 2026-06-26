@@ -1,72 +1,57 @@
 ---
 name: seedance-2-0-prompt
-description: Generate production-ready Chinese video prompts for Seedance 2.0-compatible video generation, including 即梦网页, official/API routes, and third-party/API gateways. Use for AI video prompt writing, optimization, or repair across text-to-video, image-anchored video, first/last-frame video, multimodal @图片/@视频/@音频 reference use, video editing, video extension, audio-aware video, real-person/portrait workflows when the current provider supports them, short drama shots, ads, product videos, cinematic blocking, storyboard-style segments, and troubleshooting generated results. Default to one directly pasteable Chinese prompt with explicit base scene, reference roles, shot/timing, subject, action, camera/lens language, style/light/color/texture, positive constraints, audio, and final-frame continuity control.
+description: 为 Seedance 2.0 及兼容视频生成入口撰写可直接粘贴的中文视频提示词。用户需要写、优化或修复 AI 视频提示词时使用，包括文生视频、图生视频、首尾帧、多参考素材、视频编辑、视频延展、音频驱动、真人/肖像流程、短剧镜头、广告片、产品视频、分镜、运镜、镜头控制和生成失败修复。默认交付一条正式中文提示词，明确基础画面、参考素材分工、分镜景别、主体、动作、镜头、风格、稳定约束、音频，并在确有需要时加入终帧控制。
 ---
 
 # Seedance 2.0 Prompt
 
-Generate one directly usable prompt for the user's current Seedance-compatible runner. Prioritize stability, reference control, physical camera logic, and pasteability over multiple creative variants.
+把用户的想法、参考素材和生成目标整理成一条可以直接粘贴使用的视频提示词。核心目标是稳定、清楚、可生成：参考素材各司其职，动作不超载，镜头有物理逻辑，画面和声音都能落到具体可见的结果上。
 
-## Default Contract
+## 默认交付
 
-- Output **one prompt only** by default. Do not create `稳定版`, `电影版`, `最终版`, or parallel variants unless the user explicitly asks.
-- Write the production prompt in Chinese by default. Use English or bilingual output only when requested.
-- Treat mode, aspect ratio, duration, resolution, upload strategy, and reference type as preflight decisions. Do not clutter `【基础设定】` with UI settings.
-- Always include `[音频]`. If no fixed audio is supplied, write `无BGM` plus concrete ambience, Foley, or silence.
-- Use positive anchoring. Replace `不要变形/不要乱动/不要换脸` with stable physical conditions.
-- Keep one core action and one core camera behavior per shot unless the user explicitly asks for a multi-shot storyboard.
-- Do not generate Nano Banana/image prompts from this skill. If the user needs an image first, output an image anchor card and defer image prompt writing to the dedicated image-prompt skill.
-- Do not invent platform limits, hidden API paths, or exact current UI/API choices. If a platform setting is uncertain, say it should follow the current provider's visible options or documentation.
+- 默认只交付一条正式提示词。用户明确要求多方案时，再提供多条版本。
+- 默认使用中文写提示词；用户要求英文或双语时再切换语言。
+- 信息足够时直接生成。只有缺少关键素材、时长、主体或生成目标会阻塞结果时，最多追问一个问题。
+- 把平台设置和生成入口当作外部条件处理。画幅、时长、分辨率、会员档位、上传方式和 API 能力以用户当前入口/provider 的可见选项为准。
+- 始终写 `[音频]`。没有固定音乐时，写 `无BGM`，并补上环境声、动作声或静音处理。
+- 用正向稳定描述替代负向警告，例如写“面部结构稳定、人体比例自然、主体保持画面左三分之一”，而不是围绕失败写一串否定词。
+- 一个镜头优先只有一个核心动作和一个核心运镜。复杂剧情拆成分时镜头或多个生成块。
 
-Ask at most one concise question only when a missing detail blocks execution. Otherwise choose the most stable production default and generate directly.
+## 内部判断
 
-## Preflight
+写提示词前先在心里判断这些信息，除非用户要求解释，否则不把判断过程输出给用户：
 
-Decide these before composing:
+1. 当前是文生视频、图生视频、首尾帧、多参考、视频编辑、视频延展，还是音频驱动。
+2. 每个 `@图片`、`@视频`、`@音频` 分别控制什么；冲突时谁优先。
+3. 这条视频适合单镜头、分时间段镜头，还是拆成多个生成块。
+4. 哪些细节最容易漂移：身份、服装、产品、场景、构图、姿态、接触点、画面位置、尾帧。
+5. 镜头是否能支撑动作：景别、焦段感、角度、运镜、速度、稳定方式和焦点是否一致。
+6. 声音怎么处理：无BGM、环境声、动作声、对白、歌唱、节拍或上传音频。
+7. 如果是修复失败结果，先判断失败类型，再只改最小必要变量。
 
-1. **Mode**: text-to-video, image-anchored video, first/last-frame video, multimodal reference, edit video, extend video, or audio-aware video.
-2. **Reference manifest**: which `@图片`, `@视频`, and `@音频` exist, what each one controls, and which reference has priority if conflicts appear.
-3. **Shot strategy**: single continuous shot, timed multi-shot prompt, or multiple separate generation blocks.
-4. **Anchoring risk**: identity, wardrobe/product, environment, composition, pose, contact points, screen position, final frame.
-5. **Camera plan**: shot size, angle, lens/focal-length language, movement, speed, stability, focus, and whether the camera preserves blocking.
-6. **Audio plan**: no BGM, ambience, Foley, dialogue, singing, beat sync, or supplied audio reference.
-7. **Repair path**: if the user is fixing a failed result, identify the failure class before rewriting.
+## 参考素材
 
-## When To Read References
+有参考素材时，使用这些标记：
 
-- Read `references/director-control.md` for character positioning, two-person blocking, pose/state locks, gaze direction, contact points, final-frame control, or hard cinematic single-shot control.
-- Read `references/platform-workflow.md` for provider/API boundaries, settings language, real-person/portrait policy handling, first-image workflows, long-video segmentation, reference-count strategy, or low-resolution validation flow.
-- Read `references/troubleshooting.md` when the user reports a generated-video defect or asks why a result failed.
-- Read `references/vocabulary.md` when choosing precise focal length, movement, lighting, color, texture, physical, or audio terms.
-- Read `references/examples.md` when matching output shape for text-to-video, multimodal, first/last-frame, edit, extension, or multi-shot prompts.
+- 图片：`@图片1` 到 `@图片9`
+- 视频：`@视频1` 到 `@视频3`
+- 音频：`@音频1` 到 `@音频3`
 
-## Reference Rules
+在 `【参考素材使用】` 里说明素材分工。素材越多越要克制，避免一张图同时控制身份、服装、场景、镜头、风格和节奏。
 
-Use this syntax when references exist:
-
-- Images: `@图片1` to `@图片9`
-- Videos: `@视频1` to `@视频3`
-- Audio: `@音频1` to `@音频3`
-- Mixed materials: keep the total lean; if the current provider has a stricter limit, follow that provider.
-
-Declare reference roles in `【参考素材使用】`, not in `【基础设定】`.
-
-Good role declarations:
+可用写法：
 
 - `@图片1 作为首帧、人物外观和起始构图参考。`
 - `@图片1 作为首帧，@图片2 作为尾帧目标姿态与最终构图参考。`
 - `@视频1 仅参考动作速度和运镜节奏，不复制背景内容。`
 - `@音频1 作为对白/节奏参考，画面动作贴合主要拍点。`
-
-If references conflict, state the priority:
-
 - `@图片1 的人物身份优先；@图片2 仅控制服装；@图片3 仅控制场景与光线。`
 
-Do not let one reference control identity, costume, scene, camera, style, and rhythm at the same time unless it is intentionally the locked first frame.
+如果用户还没有确定首帧，但视频明显依赖图像锚点，先输出简短的 `【图像锚定摘要】`，说明未来首帧需要锁住什么。真正的图片提示词交给图片提示词 skill。
 
-## Output Format
+## 输出结构
 
-Use this default structure:
+默认使用这个结构：
 
 ```text
 【基础设定】
@@ -87,15 +72,9 @@ Use this default structure:
 [音频] ...
 ```
 
-Do not add a title before the block. Do not append explanations after the prompt unless the user asked for reasoning.
+直接给提示词块即可。用户没有要求解释时，不在提示词前后追加说明。
 
-Use optional fields sparingly:
-
-- Add `[终帧]` only when the ending composition must be locked.
-- Do not add `[终帧]` for ordinary single-shot prompts. If the ending is simple, fold it into `[动作]` or `【分镜与景别】`.
-- Use `[终帧]` for first/last-frame generation, extension continuity, drift repair, wrong-ending repair, complex multi-character blocking, product/logo end states, or handoff frames.
-
-For complex multi-shot output, use:
+复杂多镜头使用：
 
 ```text
 【分镜】
@@ -104,172 +83,118 @@ For complex multi-shot output, use:
 转场：...
 ```
 
-Each timed shot must state shot size, main composition, one dominant action, one camera behavior, and sound if relevant.
+每个分时镜头都要交代景别、构图、一个主要动作、一个主要镜头行为和声音。
 
-## Field Rules
+## 字段写法
 
-### 基础设定
+### 【基础设定】
 
-Write one sentence describing only the current shot or segment content.
+只写当前镜头或当前片段正在发生什么。不要混入 UI 设置、上传方式、模型参数或长篇剧情回顾。
 
-Good:
+示例：`雨夜街口，一名穿黑色风衣的女性停在霓虹招牌下，准备回头看向镜头。`
 
-- `夜晚雨后的街口，一名穿黑色风衣的女性停在霓虹灯下，准备回头看向镜头。`
+### 【分镜与景别】
 
-Avoid:
+说明景别、构图、主体位置、前中后景关系和空间重点。
 
-- UI settings, seed/model notes, upload method, workflow chatter
-- story recap such as `延续上一集剧情`
-- vague hype such as `震撼大片级画面`
+示例：`中近景，人物位于画面中央偏右，前景有轻微虚化雨滴，背景是湿润街面和模糊车灯。`
 
-### 分镜与景别
+人物调度复杂时，加入左右位置、深度和接触点：
 
-For a single shot, include shot size and composition:
-
-- `中近景，人物位于画面中央偏右，前景有轻微虚化雨滴，背景是湿润街面和模糊车灯。`
-
-For character blocking, add screen position and depth:
-
-- `中景，人物固定在画面左三分之一，脚位接近画面下缘，另一名角色位于右侧中景深处，中间保留紧张的负空间。`
+`角色A固定在画面左三分之一，脚位接近画面下缘；角色B位于右侧中景深处，中间保留紧张的负空间。`
 
 ### [主体]
 
-Describe who or what appears: person/object, age/type, wardrobe, material, product model, core scene object, and visible state. Keep it grounded in what the frame can show.
+写画面里出现的人、物、产品或场景元素。包括年龄/类型、服装、材质、状态、产品型号、可见细节和环境关系。
 
 ### [动作]
 
-Write one continuous and physically plausible main action in present tense.
+写一个连续、可拍、符合物理逻辑的动作。短视频里动作越集中越稳。
 
-Good:
-
-- `她缓慢抬起右手整理耳返，随后停住并看向镜头。`
-
-Avoid stacking unrelated actions such as running, jumping, fighting, transforming, and exploding in one short shot.
+示例：`她停住脚步，右手轻轻压住风衣领口，随后缓慢回头并与镜头对视。`
 
 ### [镜头]
 
-Always include:
+必须包含：`景别/构图 + 焦段或镜头感 + 角度 + 运镜 + 速度 + 稳定方式 + 焦点`。
 
-`景别/构图 + 焦段或镜头感 + 角度 + 运镜 + 速度 + 稳定方式 + 焦点`
-
-Examples:
+示例：
 
 - `35mm 广角中景，眼平机位，摄影机从正前方缓慢推进，云台稳定，焦点锁定人物眼睛。`
 - `85mm 中长焦半身特写，浅景深，背景柔和压缩，摄影机轻微横移，焦点稳定锁定面部。`
 - `微距镜头固定机位，焦点从产品边缘缓慢转移到品牌标识，三脚架稳定。`
 
-Use focal length as prompt language, not guaranteed metadata. Prefer common lens terms over excessive technical stacks.
+焦段是提示词语言，不是保证元数据。优先使用常见镜头语言，少堆技术参数。
 
 ### [风格]
 
-Write visual style, light, color palette, tone, and texture in one field. Choose one main visual anchor.
+写一种主要视觉方向，包含质感、光线、色彩、影调和材质。避免把多个无关风格堆在一起。
 
-Good:
+示例：
 
 - `写实电影感，左侧45度柔和窗光，低饱和青绿色调，35mm胶片颗粒，柔和高光溢出。`
 - `高端商业广告质感，干净棚拍光，银灰与深蓝色彩基调，产品级锐度，低噪点。`
 
-Avoid stacking unrelated styles.
-
 ### [约束]
 
-Use positive anchoring:
+写稳定生成需要保住的正向锚点。
 
-- `人物外观一致，面部结构稳定，自然人体比例，脚位保持同一地面接触点，动作连贯，画面平稳，白平衡锁定，主体不漂移。`
+示例：`人物外观一致，面部结构稳定，自然人体比例，脚位保持同一地面接触点，动作连贯克制，画面平稳，白平衡锁定，主体不漂移。`
 
-For multiple characters, add left/right, depth, gaze, and crossing locks:
+多角色时加入左右、深度、视线、交叉和遮挡关系：
 
-- `角色A保持左侧前景，角色B保持右侧中景深处，两人不交换画面位置，中间负空间保持清晰，视线方向连续。`
+`角色A保持左侧前景，角色B保持右侧中景深处，两人不交换画面位置，不跨过画面中央竖线，中间负空间保持清晰，视线方向连续。`
 
 ### [音频]
 
-Always write this field.
+每条提示词都写音频。
 
-- No fixed music: `无BGM，保留雨声、远处车流声和轻微衣料摩擦声。`
-- Silence: `无BGM，静音处理，动作节奏由画面运动承担。`
-- Audio reference: `@音频1 作为节奏参考，动作贴合主拍点。`
-- Dialogue/singing: keep one main speaker or singer per shot.
+- 没有固定音乐：`无BGM，保留雨声、远处车流声和轻微衣料摩擦声。`
+- 静音：`无BGM，静音处理，动作节奏由画面运动承担。`
+- 有音频参考：`@音频1 作为节奏参考，动作贴合主拍点。`
+- 对白/歌唱：一个镜头优先只安排一个主要说话者或演唱者。
 
 ### [终帧]
 
-Optional. Do not include this field by default.
+`[终帧]` 不是默认字段。只在结尾构图必须锁住时使用，例如首尾帧、视频延展、漂移修复、错误结尾修复、复杂多人调度、产品/logo 终态或交接帧。
 
-Use it only when the ending composition matters, when a last frame exists, or when the user has complained about drift, wrong ending, or continuity.
+示例：`[终帧] 最后停在人物右手握住门框的近景，人物仍在左三分之一位置，背景角色保持右侧中景，中心负空间清晰。`
 
-Write a specific final image:
+## 常见场景策略
 
-- `最后停在人物右手握住门框的近景，人物仍在左三分之一位置，背景角色保持右侧中景，中心负空间清晰。`
+- 文生视频：主体、动作、镜头和风格要更具体；结尾重要时才加 `[终帧]`。
+- 图生视频：说明图片是首帧、人物/产品参考、构图参考还是风格参考。
+- 首尾帧：明确 `@图片1` 控制起点，`@图片2` 控制终点，并写自然过渡。
+- 多参考素材：一份素材只承担一个主要任务，冲突时写优先级。
+- 视频编辑：先写保留范围，再写替换/新增/删除内容，保护未修改区域。
+- 视频延展：描述原视频结束时的可见状态，再延续原镜头、光线、身份、色彩和声音。
+- 音频驱动：根据对白、歌唱或节拍安排动作；没有固定音频时默认 `无BGM`。
 
-## Mode Handling
+## 长度与复杂度
 
-Use these modes internally. Do not output a `【模式】` field unless requested.
+- 4-8 秒：一个强动作。
+- 8-12 秒：一个动作加一个信息揭示。
+- 12-15 秒：两到三个简单节拍。
+- 复杂打斗、追逐、变身、多人空间反转：拆成分时镜头或多个生成块。
+- 镜头运动会破坏人物位置时，优先减小运镜，保住画面调度。
 
-### Text-To-Video
+## 何时读参考资料
 
-Use when there is no locked reference. Make subject, action, camera, and style extra explicit. Add `[终帧]` only when the ending composition is part of the request.
+- `references/director-control.md`：人物位置、多人调度、姿态锁定、视线、接触点、终帧控制。
+- `references/platform-workflow.md`：provider/API 边界、真人/肖像支持、首帧工作流、长视频拆分、低成本测试。
+- `references/troubleshooting.md`：生成结果失败、漂移、换脸、乱切、角色换位、风格跳变等修复。
+- `references/vocabulary.md`：焦段、运镜、光线、色彩、质感、物理和声音词汇。
+- `references/examples.md`：需要对齐输出形状或示例密度时。
 
-### Image-Anchored Video
+## 最终检查
 
-Use when a locked image exists. State whether the image is first frame, character/product reference, composition reference, or style reference.
+交付前确认：
 
-### First/Last-Frame Video
-
-Use when two image anchors define start and end. State what `@图片1` and `@图片2` control, then write a natural transition between them.
-
-### Multimodal Reference
-
-Use when images, videos, and/or audio are uploaded together. Assign one job per material and resolve conflicts by priority.
-
-### Edit Video
-
-Start from preservation and change scope:
-
-- preserve original duration/camera/light/space when requested
-- define replacement/addition/removal precisely
-- constrain untouched areas
-
-### Extend Video
-
-Describe the source ending state and the new continuation. Preserve existing camera motion, subject identity, lighting, color, and audio continuity unless the user asks to change them.
-
-### Audio-Aware Video
-
-Use when dialogue, singing, beat sync, or music rhythm matters. Keep one main speaker/singer per shot. If audio is not fixed, default to `无BGM`.
-
-## Image-First Workflow
-
-If the user wants to create or lock an image before video and the image is not decided, output this card before the video prompt:
-
-```text
-【图像锚定卡】
-[主体锚点] ...
-[构图锚点] ...
-[风格锚点] ...
-[必须保留细节] ...
-[转视频时的首帧用途] ...
-```
-
-Do not write the image-generation prompt here. Tell Codex to use the dedicated image prompt skill if the user asks for actual image generation text.
-
-## Complexity Rules
-
-- 4-8 seconds: one strong action.
-- 8-12 seconds: one action plus one reveal.
-- 12-15 seconds: two or three simple timed beats.
-- Complex fight, chase, transformation, group scene, or spatial reversal: split into timed shots or separate generation blocks.
-- If a camera move would break character blocking, reduce the camera move and preserve the screen positions.
-
-## Quality Checklist
-
-Before delivering, verify:
-
-- Only one prompt is output unless variants were requested.
-- `【基础设定】` describes only current shot content.
-- References have explicit roles and priority.
-- Shot size and composition are clear.
-- `[主体]`, `[动作]`, `[镜头]`, `[风格]`, `[约束]`, and `[音频]` are present.
-- `[镜头]` includes lens language, angle, movement, speed, stability, and focus.
-- The action is not overloaded.
-- Constraints use positive anchoring.
-- Character prompts include screen position, state, gaze, contact points, and continuity when needed.
-- `[终帧]` is omitted unless ending composition, continuity, or handoff control matters.
+- 只输出一条正式提示词，除非用户明确要多方案。
+- `【基础设定】` 只描述当前画面。
+- 参考素材有明确职责和优先级。
+- 景别、构图、主体位置和焦点清楚。
+- `[主体]`、`[动作]`、`[镜头]`、`[风格]`、`[约束]`、`[音频]` 齐全。
+- `[镜头]` 包含焦段感、角度、运镜、速度、稳定方式和焦点。
+- 动作不超载，镜头不乱跳。
+- 稳定性用正向锚点表达。
+- `[终帧]` 只在结尾控制真的重要时出现。
