@@ -1,116 +1,116 @@
-# Platform And Workflow Reference
+# 平台与工作流参考
 
-Read this when a task depends on provider behavior, upload strategy, settings language, real-person/portrait support, long-video planning, first-image workflow, or API/platform boundaries.
+当任务涉及生成入口、上传策略、平台设置、真人/肖像支持、长视频拆分、先定首帧或 API 边界时，读取本文件。
 
-## Provider-First Boundary
+## 入口优先
 
-- Default to the runner/provider the user is actually using.
-- If the user says they use a third-party/API gateway that supports real-person references, do not apply 即梦网页 face-upload restrictions to the prompt.
-- If the user explicitly uses official 即梦网页 or 火山方舟, follow that route's current restrictions and docs.
-- Do not present web-front-end limitations as universal Seedance model limitations.
-- Do not mention `asset://` or SDK details unless the user explicitly asks about official API/Fangzhou/SDK.
-- If exact platform limits, model menus, membership tiers, or resolution choices matter, use wording like `以当前入口/当前 provider 可选项为准` instead of inventing values.
-- If the current provider behavior conflicts with this reference, the current provider wins.
+- 以用户正在使用的入口/provider 为准。
+- 用户说明第三方接口或 API 网关支持真人参考时，不把即梦网页的人脸上传限制套到提示词上。
+- 用户明确使用官方即梦网页或火山方舟时，再按该入口当前可见规则和文档处理。
+- 前端网页限制不是 Seedance 模型本身的通用限制。
+- 用户没有问官方 API、火山方舟或 SDK 时，不主动提 `asset://`、SDK 细节或隐藏路径。
+- 平台菜单、会员档位、分辨率和参考素材数量不确定时，写“以当前入口/provider 可选项为准”，不编造具体数值。
+- 如果用户当前入口的实际表现与本文件冲突，以用户当前入口为准。
 
-## Reference Strategy
+## 参考素材策略
 
-Use the smallest set of references that can control the shot:
+使用能控制镜头的最少素材：
 
-- one locked first frame for composition and identity
-- one identity/wardrobe reference when first frame is not enough
-- one environment reference if the scene must stay specific
-- one video reference only for motion/camera rhythm
-- one audio reference only for beat, dialogue, or ambience
+- 一张锁定首帧，用来控制构图和身份。
+- 首帧不足时，再加一张身份/服装参考。
+- 场景必须精确时，再加一张环境参考。
+- 视频参考只用于动作速度和运镜节奏。
+- 音频参考只用于节拍、对白或环境声。
 
-Avoid uploading too many references for local fixes. Too many references can reintroduce old wardrobe, scene, or composition errors.
+局部修复时尤其克制参考素材数量。素材过多会把旧服装、旧场景或旧构图错误带回来。
 
-## Mode Selection
+## 生成方式
 
-- Text-to-video: no visual anchor; write subject, action, camera, and style explicitly; add a final-frame lock only when the ending composition matters.
-- Image-anchored video: approved still controls first frame, identity, product, or composition.
-- First/last-frame video: start and end stills define transition.
-- Multimodal reference: combine image/video/audio, but assign one job per material.
-- Edit video: preserve what should stay, change only the named region/object/action, and protect untouched areas.
-- Extend video: describe the source ending state, then write the new continuation.
-- Audio-aware video: one main speaker/singer or one clear beat relationship per shot.
+- 文生视频：没有视觉锚点，主体、动作、镜头和风格要写得更明确。
+- 图生视频：已确认图片控制首帧、身份、产品或构图。
+- 首尾帧：起始图和结束图定义过渡。
+- 多参考素材：图片、视频、音频可以组合，但每份素材只承担一个主要任务。
+- 视频编辑：保留该保留的内容，只改变用户指定的区域、物体或动作。
+- 视频延展：先描述原视频结束状态，再写新的延续动作。
+- 音频驱动：一个镜头内优先只有一个主要说话者、演唱者或节拍关系。
 
-## Settings Language
+## 设置语言
 
-Keep settings out of `【基础设定】`.
+平台设置不要写进 `【基础设定】`。
 
-Mention settings outside the prompt only if helpful:
+必要时在提示词外简短提醒：
 
-- start with short low-cost tests when uncertain
-- lock aspect ratio before reference preparation
-- use current provider choices for duration and resolution
-- move to higher resolution only after composition, identity, and motion are accepted
+- 不确定时先做短时长或低成本测试。
+- 先锁定画幅，再准备参考素材。
+- 时长和分辨率使用当前入口可选项。
+- 构图、身份和动作逻辑确认后，再生成高分辨率版本。
 
-For production workflows, prefer:
+生产流程建议：
 
-1. low-resolution or short-duration test for motion/composition
-2. review the actual output
-3. revise one variable at a time
-4. generate final resolution only after the shot logic is accepted
-5. upscale or finish externally only after the Seedance result is compositionally correct
+1. 用低成本测试确认动作和构图。
+2. 看真实输出，不只看预期。
+3. 每次只改一个主要变量。
+4. 镜头逻辑通过后再出最终分辨率。
+5. 构图正确后，再外部放大、剪辑或做后期。
 
-## Long Video Strategy
+## 长视频拆分
 
-Do not force a long story into one prompt.
+长故事不要硬塞进一条提示词。
 
-- 4-8 seconds: one strong action.
-- 8-12 seconds: one action plus one reveal.
-- 12-15 seconds: two or three simple timed beats.
-- Long scenes: split into independent generation blocks with a clear handoff frame.
-- Keep original audio external when video generation is visual-only; add final sound design in editing.
+- 4-8 秒：一个强动作。
+- 8-12 秒：一个动作加一个信息揭示。
+- 12-15 秒：两到三个简单节拍。
+- 长场景：拆成独立生成块，并明确交接帧。
+- 视频生成只负责画面时，原始音频保留在剪辑软件里，最终声音在后期完成。
 
-For each block, define:
+每个生成块都要定义：
 
-- start state
-- end state
-- reference roles
-- one narrative task
-- one camera strategy
-- continuity locks
-- final frame/handoff frame
+- 起始状态
+- 结束状态
+- 参考素材分工
+- 一个叙事任务
+- 一个镜头策略
+- 连续性锚点
+- 终帧或交接帧
 
-## First-Image Workflow
+## 先定首帧
 
-If the video depends on an image that is not locked yet:
+如果视频依赖尚未确认的图片：
 
-1. output `【图像锚定卡】`
-2. state what the later approved image will control
-3. do not write a full Nano Banana/image prompt in this skill
-4. after the image is approved, write the Seedance prompt with that image as `@图片1`
+1. 先输出 `【图像锚定摘要】`。
+2. 说明后续首帧需要控制什么。
+3. 不在本 skill 内写完整图片生成提示词。
+4. 图片确认后，再把它作为 `@图片1` 写 Seedance 提示词。
 
-Use the image card to protect:
+图像锚定摘要用于保护：
 
-- subject identity
-- wardrobe/product
-- composition
-- scene geometry
-- light/color
-- details that must survive video generation
+- 主体身份
+- 服装/产品
+- 构图
+- 场景空间
+- 光线和色彩
+- 必须在视频里保留的细节
 
-## Real-Person And API Policy
+## 真人与 API 边界
 
-- Do not make the skill itself reject human faces. The prompt writer should adapt to the user's provider.
-- For official 即梦网页/火山方舟, treat realistic human face reference support as restricted unless current docs or the user-provided route say otherwise.
-- For third-party/API gateways that support verified real-person references, write normal portrait/identity prompts and preserve face consistency, expression, body, wardrobe, and consent-safe identity language.
-- Do not promise any provider will accept a request unless the current route is verified or the user confirms it works.
-- When platform support is uncertain, phrase it as a provider/workflow note, not as a prompt limitation.
+- 这个 skill 本身不拒绝真人脸；提示词应适配用户当前入口。
+- 官方即梦网页/火山方舟是否支持写实人脸参考，以该入口当前文档和可见规则为准。
+- 第三方接口或 API 网关明确支持真人参考时，正常写肖像和身份一致性提示词，并使用安全、克制、授权语境。
+- 不承诺任何 provider 一定接受请求，除非当前入口已验证或用户确认它可用。
+- 平台支持不确定时，把它写成工作流提醒，不写成提示词限制。
 
-## Production Handoff
+## 生产交接
 
-When upstream assets are already accepted:
+上游素材已经确认时：
 
-- translate the accepted shot card, still, or storyboard into a Seedance prompt
-- do not redesign the story, character, wardrobe, or scene unless requested
-- if references conflict, surface the conflict and assign priority
-- preserve project authority assets over style inspiration
+- 把已确认的镜头卡、首帧或分镜翻译成 Seedance 提示词。
+- 不重新设计故事、角色、服装或场景，除非用户明确要求。
+- 参考素材冲突时，指出冲突并分配优先级。
+- 项目里的权威素材优先于风格灵感图。
 
-When generated output is being reviewed:
+检查生成结果时：
 
-- judge the actual output, not the intended prompt
-- identify the smallest failing variable
-- revise only the variable that caused the failure
-- keep accepted identity, scene, and timing intact
+- 看真实输出，不替预期结果找理由。
+- 找到最小失败变量。
+- 只修导致失败的变量。
+- 已经通过的身份、场景和节奏保持不变。
