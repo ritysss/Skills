@@ -1,86 +1,86 @@
-# Director Control Reference
+# 导演控制参考
 
-Read this when a Seedance prompt needs strict character anchoring, screen positioning, pose locks, gaze direction, two-character blocking, camera compatibility, or final-frame control.
+当提示词需要严格控制人物锚定、画面位置、姿态、视线、双人调度、接触点、镜头兼容性或终帧时，读取本文件。
 
-## Control Hierarchy
+## 控制优先级
 
-Resolve conflicts in this order unless the user says otherwise:
+素材或要求冲突时，默认按这个顺序取舍：
 
-1. Identity/face/body silhouette
-2. Costume/product/prop
-3. Environment and light
-4. Composition and screen position
-5. Subject action
-6. Camera movement
-7. Style and texture
-8. Audio and text
+1. 身份、面部、体型轮廓
+2. 服装、产品、道具
+3. 环境和光线
+4. 构图和画面位置
+5. 主体动作
+6. 摄影机运动
+7. 风格和质感
+8. 音频和文字
 
-State the hierarchy in `【参考素材使用】` when multiple references can conflict.
+多参考素材可能冲突时，在 `【参考素材使用】` 中写明优先级。
 
-## Screen Map
+## 画面地图
 
-Use screen geometry as a strong compositional anchor:
+用画面几何位置稳定构图：
 
 - `左三分之一 / 中央 / 右三分之一`
 - `前景 / 中景 / 背景`
 - `上三分之一 / 下三分之一`
-- `x=30% / x=50% / x=70%` when precision helps
-- `脚位接近 y=88%` or `主体占画面高度约45%` when ground contact or scale matters
+- 需要更精确时可写 `x=30% / x=50% / x=70%`
+- 地面接触或比例重要时可写 `脚位接近 y=88%`、`主体占画面高度约45%`
 
-Treat percentages as prompt anchors, not exact guarantees. Combine them with normal film language.
+百分比是提示词锚点，不是精确测量。最好和常规电影语言一起使用。
 
-## Character Anchor Block
+## 人物锚定块
 
-For difficult character shots, compose a compact anchor before writing `[动作]` and `[镜头]`.
+困难人物镜头可以先组织一个紧凑锚定，再写 `[动作]` 和 `[镜头]`。
 
-Template:
+模板：
 
 ```text
 角色A锚定：人物来自@图片1，保持相同面部、发型、服装、体型比例和轮廓；固定在画面左三分之一，中心约x=30%，位于前景，中景/半身/全身；身体朝向画面右侧，视线看向角色B；双脚踩在同一地面接触点，右手握住门框；情绪保持紧张克制。
 ```
 
-Include only details that matter for the current shot.
+只写当前镜头真正需要锁定的细节。
 
-## Spatial Relationship Locks
+## 空间关系锁定
 
-For two or more characters, specify:
+两个或更多角色同时出现时，写清：
 
-- screen side: who stays left, center, or right
-- depth layer: foreground, midground, or background
-- distance: close, medium, far, or separated by an object/negative space
-- eyeline: who looks at whom
-- screen direction: facing screen-left or screen-right
-- crossing rule: whether characters may cross the center line
-- occlusion rule: whether one may block the other
-- negative space: what empty space remains visible
+- 谁在左侧、中央或右侧
+- 谁在前景、中景或背景
+- 角色之间距离：近、中、远，是否被物体或负空间隔开
+- 视线关系：谁看谁
+- 身体方向：朝画面左侧或右侧
+- 是否允许跨过画面中线
+- 是否允许遮挡对方
+- 中间需要保留什么空白或物体
 
-Example:
+示例：
 
 ```text
 角色A保持左侧前景，角色B保持右侧中景深处，两人不交换画面位置，不跨过画面中央竖线；角色A面向画面右侧看向角色B，角色B面向画面左侧看向角色A，中间保留清晰负空间。
 ```
 
-## State Locks
+## 状态锁定
 
-Position alone is not enough. Lock the visible state:
+只锁位置不够，还要锁可见状态：
 
-- emotion and facial expression
-- posture and body orientation
-- costume/hair/wet-dry state/injury or makeup
-- object in hand
-- gaze direction
-- body tension
-- allowed micro-motions
+- 情绪和表情
+- 姿态和身体朝向
+- 服装、发型、湿干状态、伤痕或妆容
+- 手里的物体
+- 视线方向
+- 身体紧张程度
+- 允许发生的微动作
 
-Example:
+示例：
 
 ```text
 人物保持疲惫但警觉的表情，肩膀紧绷，右手始终握住黑色手提包，视线从门把手转向画面右侧人物；只允许眼神、呼吸、发丝和衣料轻微运动。
 ```
 
-## Grounding And Contact Points
+## 接触点
 
-Use contact points to prevent drifting:
+接触点能减少漂移：
 
 - `双脚踩在同一湿地反光位置`
 - `背部贴住墙面`
@@ -89,73 +89,73 @@ Use contact points to prevent drifting:
 - `膝盖接触地面`
 - `影子与脚部连接，方向与主光一致`
 
-When a character must stay still:
+人物需要保持原位时：
 
 ```text
 人物身体保持原位，双脚不离开地面接触点，只有眼神、呼吸、发丝和衣料发生轻微变化。
 ```
 
-## Motion Layers
+## 动作层级
 
-Separate four motion layers:
+把运动拆成四层：
 
-1. Subject motion: character/object movement
-2. Internal motion: expression, breathing, hair, fabric, hands
-3. Camera motion: dolly, track, pan, tilt, crane, orbit, handheld
-4. Environmental motion: rain, smoke, dust, crowd, vehicles, particles
+1. 主体运动：人物或物体移动
+2. 内部运动：表情、呼吸、头发、衣料、手部
+3. 摄影机运动：推进、跟拍、摇镜、升降、环绕、手持
+4. 环境运动：雨、烟、灰尘、人群、车辆、粒子
 
-Do not let all four layers become intense at once. If subject action is complex, simplify camera motion. If camera motion is strong, anchor character positions.
+四层不要同时都很强。主体动作复杂时，镜头要简单；镜头很强时，人物位置要更稳。
 
-## Camera Compatibility
+## 镜头兼容性
 
-Always specify:
+镜头必须说明：
 
-- shot size: wide, full shot, medium, close-up, macro
-- angle: eye-level, low-angle, high-angle, overhead, POV, over-the-shoulder
-- lens: 24mm, 35mm, 50mm, 85mm, 135mm, macro, anamorphic
-- movement: locked-off, slow dolly-in, lateral track, crane up, orbit, handheld
-- focus: shallow depth, deep focus, rack focus, focus locked on eyes/product/logo
-- composition: rule of thirds, symmetry, negative space, leading lines
+- 景别：远景、全景、中景、近景、特写、微距
+- 角度：眼平、低机位、高机位、俯拍、主观视角、过肩
+- 焦段感：24mm、35mm、50mm、85mm、135mm、微距、变形宽银幕
+- 运镜：固定机位、缓慢推进、横移跟拍、上升、环绕、手持
+- 焦点：浅景深、深焦、焦点转移、锁定眼睛/产品/logo
+- 构图：三分法、对称、负空间、引导线
 
-If character position matters, the camera must preserve blocking:
+人物位置重要时，运镜必须服务调度：
 
 ```text
 35mm 中景眼平机位，摄影机从固定正面角度缓慢推进，只推进约10%，全程保持角色A在左三分之一、角色B在右三分之一，中间负空间不被破坏。
 ```
 
-## Final Frame
+## 终帧
 
-Use a final frame when the ending must be controlled. Do not add it to every ordinary prompt.
+只有结尾必须被控制时才写终帧。普通单镜头不必每次都加。
 
-Include:
+终帧需要包含：
 
-- who/what is visible
-- screen position and depth
-- pose or object state
-- gaze direction
-- camera distance and focus
-- emotional or narrative endpoint
+- 谁/什么可见
+- 画面位置和深度
+- 姿态或物体状态
+- 视线方向
+- 镜头距离和焦点
+- 情绪或叙事落点
 
-Example:
+示例：
 
 ```text
 [终帧] 最后定格在角色A握紧门框的左侧中近景，角色A眼睛看向画面右侧，角色B仍在右侧中景深处，焦点从手部回到角色A眼睛，中心负空间保持清晰。
 ```
 
-## Positive Constraint Rewrites
+## 正向稳定写法
 
-| Need | Use |
+| 需求 | 写法 |
 |---|---|
-| no face change | `人物保持相同面部结构、发型、服装、体型比例和轮廓。` |
-| no drifting | `双脚保持同一地面接触点，主体始终位于画面左三分之一。` |
-| no swapping | `角色A保持左侧，角色B保持右侧，两人不交换位置。` |
-| no random camera | `摄影机进行缓慢受控推进，保持原有构图和空间关系。` |
-| no blur | `主体焦点清晰，快速运动只产生受控电影运动模糊。` |
+| 脸不变 | `人物保持相同面部结构、发型、服装、体型比例和轮廓。` |
+| 主体不漂 | `双脚保持同一地面接触点，主体始终位于画面左三分之一。` |
+| 两人不换位 | `角色A保持左侧，角色B保持右侧，两人不交换位置。` |
+| 镜头不乱跑 | `摄影机进行缓慢受控推进，保持原有构图和空间关系。` |
+| 画面不糊 | `主体焦点清晰，快速运动只产生受控电影运动模糊。` |
 
-## Complexity Limits
+## 复杂度限制
 
-- One shot: one main idea, one main action, one camera strategy.
-- More than two strong actions: split into timed shots.
-- More than two camera moves: choose the most important one.
-- More than three important characters: split the scene or define foreground/midground/background groups.
-- Complex fight/chase/transformation: build separate generation blocks with handoff frames.
+- 一个镜头只承载一个主要想法、一个主要动作、一个镜头策略。
+- 超过两个强动作时，拆成分时镜头。
+- 超过两个运镜动作时，只保留最重要的一个。
+- 超过三个重要角色时，拆镜头或分成前景/中景/背景组。
+- 复杂打斗、追逐、变身，用多个生成块和交接帧处理。
