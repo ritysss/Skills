@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seedance Prompt"
+  short_description: "Compact deterministic prompts for Seedance video"
+  default_prompt: "Use $seedance-prompt to write one paste-ready Chinese Seedance-compatible video prompt for my current provider. For a single shot, output only [主体], [动作], [镜头], [风格], [约束], and [音频], embedding each reference role in the field it controls."

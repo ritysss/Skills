@@ -1,4 +1,0 @@
-interface:
-  display_name: "Seedance 2.0 Prompt"
-  short_description: "写可直接粘贴的视频提示词"
-  default_prompt: "使用 $seedance-2-0-prompt，根据我的目标和参考素材，写一条可直接粘贴使用的中文 Seedance 2.0 视频提示词。"
