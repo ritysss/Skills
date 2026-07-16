@@ -1,0 +1,47 @@
+{
+  "skill_name": "nanobanana-prompt",
+  "evals": [
+    {
+      "id": "minimal-cinematic-generate",
+      "prompt": "直接来，赛博朋克城市夜景，用 nano banana pro。",
+      "expected_output": "Returns one copy-ready prompt without questions, with a clear hero, composition, lighting, atmosphere, and no unsupported API fields; suggests Pro and a sensible ratio/resolution outside the code block.",
+      "files": []
+    },
+    {
+      "id": "pro-ratio-boundary",
+      "prompt": "用 Nano Banana Pro 做一张 1:8 的超长竖图：一座从云层一直延伸到地底的奇幻垂直城市剖面，给我 prompt 和参数。",
+      "expected_output": "Does not claim 1:8 is supported by Pro; clearly offers either a supported Pro ratio or a switch to Gemini 3.1 Flash Image for 1:8.",
+      "files": []
+    },
+    {
+      "id": "exact-chinese-poster-text",
+      "prompt": "做一张活动海报，标题必须是“夏日创作营 2026”，副标题是“50 个参考，一次看完”，不要出现其他文字。",
+      "expected_output": "Preserves both Chinese strings exactly, assigns typography and layout, states no other text, and does not promise perfect spelling.",
+      "files": []
+    },
+    {
+      "id": "surgical-product-edit",
+      "prompt": "只把图里的银色耳机改成蓝色，产品形状、logo、机位、背景、反射和阴影全部保持。",
+      "expected_output": "Uses a small Change only delta and a comprehensive Preserve list; does not rebuild the whole scene or rely on generic emphasis tokens.",
+      "files": []
+    },
+    {
+      "id": "multi-reference-contamination",
+      "prompt": "图1是角色身份，图2只要服装，图3只要光影。图2和图3的人脸、场景和文字都不能带进来。",
+      "expected_output": "Maps one role per image, preserves Image 1 identity, imports only clothing and lighting from the other references, and explicitly blocks subject/scene/text contamination.",
+      "files": []
+    },
+    {
+      "id": "model-routing-video-input",
+      "prompt": "我想把一段参考视频变成一张电影海报，Nano Banana Pro 还是 2？顺便给提示词。",
+      "expected_output": "Routes video input to Gemini 3.1 Flash Image based on current official capability, returns a poster prompt, and keeps model advice outside the copy block.",
+      "files": []
+    },
+    {
+      "id": "generic-provider-routing",
+      "prompt": "帮我写一个出图提示词：白色运动鞋电商主图，方形。",
+      "expected_output": "Uses Nano Banana Pro as the unspecified-provider default, writes a concrete product prompt, suggests 1:1 and 2K/4K outside the block, and does not output API JSON.",
+      "files": []
+    }
+  ]
+}

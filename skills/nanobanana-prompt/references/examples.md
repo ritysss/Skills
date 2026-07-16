@@ -1,6 +1,6 @@
-# Nano Banana Pro 提示词示例库
+# NanoBanana Pro 提示词示例库
 
-每个示例包含：分析 + 英文提示词 + 中文说明 + 参数建议。覆盖常见场景。
+每个示例包含：分析 + 英文提示词 + 中文说明 + 参数建议。只借结构，不把其中的镜头、分辨率或本地小样本结果当成所有任务的默认值。
 
 ---
 
@@ -52,7 +52,7 @@ A high-resolution, studio-lit product photograph of a pair of pristine white lea
 
 ---
 
-## 3. 电影海报排版 ✅ 实测验证 95%
+## 3. 电影海报排版
 
 **测试能力**：Text Rendering + 暗调氛围 + 版面分区 + 多层文字
 
@@ -69,8 +69,8 @@ Neo-noir 电影海报。上 2/3 是雨夜东京小巷中的风衣人物背影，
 - 宽高比：2:3
 - 分辨率：4K
 
-【实测结果】（2026-03-12 Higgsfield，4 张）
-- 文字渲染：标题+副标题 4/4 拼写 100% 正确，金属质感到位
+【本地样本记录】（2026-03-12 Higgsfield，4 张；不代表稳定命中率）
+- 文字渲染：该批次标题和副标题 4/4 拼写正确，金属质感到位
 - 版面分区：上 2/3 + 下 1/3 严格遵守
 - 暗调氛围：深蓝+品红霓虹精准还原
 - 意外收获：模型自动补充了电影信用块（导演/演员/上映日期）
@@ -187,24 +187,24 @@ A minimalist business card mockup lying flat on a sheet of textured cream cotton
 
 ---
 
-## 9. 3D 等距悬浮岛 ✅ 实测验证 97%
+## 9. 3D 等距悬浮岛
 
 **测试能力**：非写实风格切换 + 文字渲染 + 多元素空间布局
 
 【分析】
-完全脱离摄影范式，测试 3D 渲染风格。用 "isometric 3D render" + "Pixar-quality" 作为风格锚点，验证五段叙事法在非摄影场景的通用性。
+完全脱离摄影范式，测试 3D 渲染风格。用 "isometric 3D render" + "stylized feature-animation quality" 作为风格锚点。
 
 【Prompt】
-An isometric 3D render of a tiny floating island shaped like a perfect cube of earth and rock, hovering against a clean soft gradient sky transitioning from pale peach at the bottom to light lavender at the top. On top of the island sits a miniature Japanese convenience store with warm interior light glowing through its glass front doors, a striped awning in red and white, and a small illuminated sign reading "24H" above the entrance. Beside the store, a single cherry blossom tree in full bloom leans gently to the right, with a few pink petals drifting off into the empty sky. A tiny vending machine glows blue on the left side. The edges of the floating island reveal cross-section layers of dark soil, lighter clay, and rough stone at the bottom. Soft ambient occlusion shadows, miniature tilt-shift depth of field, pastel and muted color palette, clean studio lighting from above, Pixar-quality subsurface scattering on the cherry blossoms, toy-like scale.
+An isometric 3D render of a tiny floating island shaped like a perfect cube of earth and rock, hovering against a clean soft gradient sky transitioning from pale peach at the bottom to light lavender at the top. On top of the island sits a miniature Japanese convenience store with warm interior light glowing through its glass front doors, a striped awning in red and white, and a small illuminated sign reading "24H" above the entrance. Beside the store, a single cherry blossom tree in full bloom leans gently to the right, with a few pink petals drifting off into the empty sky. A tiny vending machine glows blue on the left side. The edges of the floating island reveal cross-section layers of dark soil, lighter clay, and rough stone at the bottom. Soft ambient occlusion shadows, miniature tilt-shift depth of field, pastel and muted color palette, clean studio lighting from above, stylized feature-animation-quality subsurface scattering on the cherry blossoms, toy-like scale.
 
 【中文说明】
-等距 3D 悬浮岛。方块形岛屿上有迷你日本便利店（暖黄灯光+红白遮阳棚+"24H"招牌）、樱花树（花瓣飘落）、蓝色自动售货机。岛屿截面露出地质分层。粉蜡笔天空渐变，Pixar 质感玩具风。
+等距 3D 悬浮岛。方块形岛屿上有迷你日本便利店（暖黄灯光+红白遮阳棚+"24H"招牌）、樱花树（花瓣飘落）、蓝色自动售货机。岛屿截面露出地质分层。粉蜡笔天空渐变，动画长片质感玩具风。
 
 【参数建议】
 - 宽高比：1:1
 - 分辨率：4K
 
-【实测结果】（2026-03-12 Higgsfield，3 张）
+【本地样本记录】（2026-03-12 Higgsfield，3 张；不代表稳定命中率）
 - 风格切换：零写实残留，纯 3D 渲染
 - "24H" 文字：3/3 清晰正确
 - 地质分层：3/3 完美（表土→黏土→岩石）
@@ -218,7 +218,7 @@ An isometric 3D render of a tiny floating island shaped like a perfect cube of e
 
 ---
 
-## 10. 多主体空间叙事 ✅ 实测验证 93%
+## 10. 多主体空间叙事
 
 **测试能力**：多角色动作区分 + 前中后景分层 + 冷暖混合光 + 超宽比例
 
@@ -235,7 +235,7 @@ A wide-angle interior photograph of a tiny eight-seat ramen counter restaurant i
 - 宽高比：21:9（超宽电影比例，容纳横向多人）
 - 分辨率：4K
 
-【实测结果】（2026-03-12 Higgsfield，4 张）
+【本地样本记录】（2026-03-12 Higgsfield，4 张；不代表稳定命中率）
 - 4 角色动作：4/4 全部正确区分（读报/拍照/吃面/舀汤）
 - 空间位置：左中右三人排列正确
 - 前中后景：碗筷→三人→厨师 层次清晰
@@ -303,16 +303,16 @@ A portrait of the exact person shown in reference image 1 — same facial featur
 
 | 场景类型 | 推荐宽高比 | 推荐分辨率 | 官方模板 | 关键焦点 | 实测 |
 |---------|-----------|-----------|---------|---------|------|
-| 电影感人像 | `16:9` / `21:9` | `4K` | Photorealistic | 胶片 + 灯光 + 情绪 | ✅ 85% |
+| 电影感人像 | `16:9` / `21:9` | `2K` / `4K` | Photorealistic | 胶片 + 灯光 + 情绪 | 有本地样本 |
 | 产品图 | `1:1` / `4:5` | `4K` | Product Mockup | 材质 + 灯光 + 背景 | |
-| 海报排版 | `2:3` / `3:4` | `4K` | Text Rendering | 版面结构 + 文字 | ✅ 95% |
+| 海报排版 | `2:3` / `3:4` | `2K` / `4K` | Text Rendering | 版面结构 + 文字 | 有本地样本 |
 | 角色系列 | `3:2` / `4:3` | `2K` | Photorealistic | 描述一致性 + 参考图 | |
 | 城市风光 | `16:9` / `21:9` | `4K` | Photorealistic | 构图 + 氛围 + 色调 | |
 | 社交媒体竖图 | `9:16` / `4:5` | `2K` | Photorealistic | 竖版构图 + 平台适配 | |
-| 美食摄影 | `1:1` / `4:5` | `4K` | Photorealistic | 材质 + 光线 + 微距 | ✅ 90% |
+| 美食摄影 | `1:1` / `4:5` | `2K` / `4K` | Photorealistic | 材质 + 光线 + 微距 | 有本地样本 |
 | 品牌设计 | `3:2` / `1:1` | `4K` | Text Rendering + Minimalist | 文字 + 排版 + 留白 | |
-| 3D 等距渲染 | `1:1` | `4K` | — (自定义风格锚点) | 风格切换 + 空间布局 | ✅ 97% |
-| 多主体叙事 | `21:9` / `16:9` | `4K` | Photorealistic | 角色区分 + 空间分层 | ✅ 93% |
-| 贴纸/插画 | `1:1` | `2K` | Stylized/Stickers | 风格 + 透明背景 | |
+| 3D 等距渲染 | `1:1` | `2K` / `4K` | — (自定义风格锚点) | 风格切换 + 空间布局 | 有本地样本 |
+| 多主体叙事 | `21:9` / `16:9` | `2K` / `4K` | Photorealistic | 角色区分 + 空间分层 | 有本地样本 |
+| 贴纸/插画 | `1:1` | `2K` | Stylized/Stickers | 风格 + 干净可抠图背景 | |
 | 风格迁移 | 同原图 | `2K` | Style Transfer | 保留构图 + 改风格 | |
 | 局部编辑 | 同原图 | `2K` | Image Editing | 精确描述修改区域 | |

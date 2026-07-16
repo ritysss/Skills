@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nano Banana Prompt"
+  short_description: "Build copy-ready Nano Banana image prompts"
+  default_prompt: "Use $nanobanana-prompt to turn this image idea and any references into one copy-ready Nano Banana prompt, with only helpful model, ratio, and resolution guidance outside the prompt."

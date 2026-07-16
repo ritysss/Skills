@@ -1,4 +1,0 @@
-interface:
-  display_name: "Nano Banana Prompt"
-  short_description: "Write Nano Banana image prompts"
-  default_prompt: "Use $nano-banana-prompt to translate this locked shot card, chapter style card, and reference set into a Nano Banana Pro image prompt package."
