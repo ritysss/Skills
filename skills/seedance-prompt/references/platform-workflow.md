@@ -51,9 +51,10 @@ For production workflows, prefer:
 
 1. low-resolution or short-duration test for motion/composition
 2. review the actual output
-3. revise one variable at a time
-4. generate final resolution only after the shot logic is accepted
-5. upscale or finish externally only after the Seedance result is compositionally correct
+3. when a failure may be stochastic, generate a small candidate batch with the exact same prompt, reference set, and parameters before rewriting
+4. if the same visible failure repeats across multiple candidates, revise only the smallest owning variable; otherwise select the strongest take
+5. generate final resolution only after the shot logic is accepted
+6. upscale or finish externally only after the Seedance result is compositionally correct
 
 ## Long Video Strategy
 

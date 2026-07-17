@@ -76,6 +76,16 @@ Risk guidance:
 - Give the move a reason: reveal new information, follow subject motion, change emotional distance, redirect attention, or land a transition.
 - Match units to the motion. Use linear distance/speed for a dolly or vehicle, degrees or screen travel for a pan/tilt, and duration for a rack focus. Do not describe angular camera motion in `km/h`.
 
+### Camera Regime And Settle Phrases
+
+- `三脚架锁定，表演承担节奏；如需移动，只执行一次缓慢推进，平缓起步，平缓收住。`
+- `摄影机随操作者呼吸轻微起伏，并随主体重心小幅调整构图，幅度克制。`
+- `云台或轨道沿主体的单一路径平稳跟随，地平线稳定，主体位置始终可读。`
+- `主体动作结束后摄影机收住在反应表情、接触点或揭示物上，并停留一拍。`
+- `对白期间正面稳住说话者，只在换人、动作或反应间隙重新构图。`
+- `同一时刻只执行一个主运镜；长镜头按顺序完成各阶段，并在每个阶段末收住。`
+- `碰撞瞬间只发生一次轻微机身反馈，随后恢复稳定。`
+
 ## Cut Precision And Vocabulary
 
 - One continuous shot: use the compact six-field contract and explicitly keep the camera continuous when accidental cuts are likely.

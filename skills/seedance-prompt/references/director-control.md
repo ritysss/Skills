@@ -82,6 +82,24 @@ Good:
 
 Avoid adding a push, orbit, pan, and rack focus only to make the shot feel more cinematic.
 
+## Camera Regime And Movement Envelope
+
+Select one regime per shot before naming a move:
+
+- `locked-presentational`: tripod or locked base; performance carries the beat; if movement is needed, use one slow deliberate push, zoom, pan, tilt, or focus change with a gentle start and finish.
+- `observational-handheld`: restrained operator breathing, weight-shift, and small motivated reframing; micro-motion stays subtle and the camera settles when a face, line, or reaction must read.
+- `stabilized-follow`: gimbal, dolly, or stable tracking base following one subject path; horizon and subject position remain readable; the move settles on the reveal, contact, or ending state.
+
+Write camera execution in this order:
+
+`base regime + visible trigger/follow target + one primary movement + speed/amplitude/operator texture + settle target/hold + focus`
+
+At any instant, execute one primary camera movement. If a continuous shot needs several phases, write them in sequence and give each phase a settle point instead of stacking simultaneous multi-axis moves.
+
+For dialogue or lip sync, hold the active speaker frontally readable during the line; reframe only between lines, actions, or reaction beats unless accepted source authority says otherwise.
+
+The camera regime is an internal decision compiled into `[镜头]` or the owning shot line, not a new output wrapper.
+
 ## Shot Precision Ladder
 
 Choose the least rigid mode that still protects the intended edit:
